@@ -1,0 +1,30 @@
+[
+    {
+        "date": "2022-01-14T01:20:03.642Z",
+        "title": "Christmas Sale | Get Flat 30% OFF on all the 5 products | H...",
+        "time": "2022-01-14T01:20:03.642Z",
+        "products": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "duration": "09:00"
+    },
+    {
+        "date": "2022-01-14T01:20:03.642Z",
+        "title": "New Year Sale | Get Flat 30% OFF on all the 7 products | H...",
+        "time": "2022-01-31T01:20:03.642Z",
+        "products": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ],
+        "duration": "21:00"
+    }
+]

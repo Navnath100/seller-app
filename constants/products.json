@@ -1,0 +1,34 @@
+[
+    {
+        "id":"1",
+        "image":"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRFrVLNkAzNiKdiC7hr4Jq7vgLHqQoL1hnJns0Pe6eJ5X7ykFpG",
+        "product_name":"Beer Honey T-Shirt",
+        "currency":"AED",
+        "price":"1,353.05",
+        "offer":"12% OFF"
+    },
+    {
+        "id":"2",
+        "image":"https://pngimg.com/uploads/running_shoes/running_shoes_PNG5817.png",
+        "product_name":"White Walkers Men's & Boys Multicolor Running Casual...",
+        "currency":"AED",
+        "price":"1,733.05",
+        "offer":"12% OFF"
+    },
+    {
+        "id":"333",
+        "image":"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQm1MgktMqxdvEXRlbsCwVTAjR6CWt7xc1Fm1rfPQA-ylbOUsEU",
+        "product_name":"Nike Boy's NSW Track Suit Tricot Style",
+        "currency":"AED",
+        "price":"1,641.05",
+        "offer":"12% OFF"
+    },
+    {
+        "id":"4",
+        "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjstKUkiMfdQGbEOxDW_B-JZauewltt5lzhiNocIM88nzaXS9k",
+        "product_name":"VINTO Fitness Boxing Gloves 10 Oz Yellow",
+        "currency":"AED",
+        "price":"1,761.05",
+        "offer":"12% OFF"
+    }
+]

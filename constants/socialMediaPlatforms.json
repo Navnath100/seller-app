@@ -1,0 +1,27 @@
+[
+    {
+        "id":"1",
+        "name": "Facebook",
+        "icon": "facebook-f"
+    },
+    {
+        "id":"2",
+        "name": "Instagram",
+        "icon": "instagram"
+    },
+    {
+        "id":"3",
+        "name": "YouTube",
+        "icon": "youtube"
+    },
+    {
+        "id":"4",
+        "name": "Twitch",
+        "icon": "twitch"
+    },
+    {
+        "id":"5",
+        "name": "Vimeo",
+        "icon": "vimeo-v"
+    }
+]
