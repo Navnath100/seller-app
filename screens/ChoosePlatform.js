@@ -89,7 +89,6 @@ const selected = isSelected(item);
                     </View>
                 </View>
 
-                <Text style={{ fontSize: 14, fontWeight: '600',marginVertical:20 }}> Choose which platforms you want to go live on  😍</Text>
                 <View style={[GlobalStyles.buttonClicked, { height: 100, width: width / 100 * 90,flexDirection:'row',justifyContent:'space-evenly',marginVertical:30 }]}>
                     <Image
                         style={{ width: 100, height: 30, resizeMode: 'stretch' }}
@@ -98,6 +97,8 @@ const selected = isSelected(item);
                 <Text style={{ fontSize: 18, fontWeight: '600',color:colors.white }}> My Company</Text>
 
                 </View>
+
+                <Text style={{ fontSize: 14, fontWeight: '600',marginVertical:20,color:colors.black }}> Choose which platforms you want to go live on  😍</Text>
 
                 <FlatList
                 style={{marginTop:20}}

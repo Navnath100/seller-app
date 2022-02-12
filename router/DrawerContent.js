@@ -62,7 +62,7 @@ export function DrawerContent(props) {
                             labelStyle={{ color: '#FFF', fontWeight: '300', fontSize: 25 }}
                             onPress={() => { props.navigation.navigate('Subscriptions') }}
                         />
-                        <DrawerItem
+                        {/* <DrawerItem
                             style={{}}
                             icon={({ color, size }) => (
                                 <Icon
@@ -75,7 +75,7 @@ export function DrawerContent(props) {
                             labelStyle={{ color: '#FFF', fontWeight: '300', fontSize: 25 }}
 
                             onPress={() => { props.navigation.navigate('GoLive') }}
-                        />
+                        /> */}
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>

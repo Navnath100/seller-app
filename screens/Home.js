@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StatusBar, Image, Dimensions, FlatList, Alert, ScrollView,TouchableOpacity } from 'react-native'
+import { View, Text, StatusBar, Image, Dimensions, FlatList, Alert, ScrollView, TouchableOpacity } from 'react-native'
 import Header from '../components/Header'
 import { APIs } from '../constants/apiList';
 import { API } from '../constants/network';
@@ -10,14 +10,22 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import colors from '../assets/colors';
 import GlobalStyles from '../components/GlobalStylesheet';
 import moment from 'moment';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { height, width } = Dimensions.get('window');
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const [Schedules, setSchedules] = useState(Array);
   useEffect(() => {
-    // getSchedules();
-    navigation.navigate("Permissions",{goBack:"Home"})
+    getSchedules();
+    async function checkISPermissionAsked(){try {
+      const isPermissionAsked = await AsyncStorage.getItem('isPermissionAsked');
+      if (!isPermissionAsked)
+        navigation.navigate("Permissions", { goBack: "Home" })
+    } catch (e) {
+      console.log(e);
+    }}
+    checkISPermissionAsked();
   }, []);
   // console.log(APIs.getSchedules);
   const getSchedules = async () => {
@@ -36,7 +44,7 @@ export default function Home({navigation}) {
   }
 
   console.log("Schedules ", Schedules);
-  const renderSchedules = ({item}) => {
+  const renderSchedules = ({ item }) => {
     return (
       <CardView
         cardElevation={10}
@@ -47,27 +55,27 @@ export default function Home({navigation}) {
         <View style={{ flexDirection: 'row' }}>
 
           <View style={{ width: 110, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: 36,color:colors.black }}>{moment(item.date).format('DD')}</Text>
-            <Text style={{ fontSize: 12,color:colors.black }}>{moment(item.date).format('MMMM YYYY')}</Text>
-            <Text style={{ fontSize: 12,color:colors.black }}>{moment(item.date).format('dddd')}</Text>
+            <Text style={{ fontSize: 36, color: colors.black }}>{moment(item.date).format('DD')}</Text>
+            <Text style={{ fontSize: 12, color: colors.black }}>{moment(item.date).format('MMMM YYYY')}</Text>
+            <Text style={{ fontSize: 12, color: colors.black }}>{moment(item.date).format('dddd')}</Text>
           </View>
 
           <View style={{ borderColor: "#000", borderEndWidth: 0.5 }} />
 
           <View style={{ width: width - 155, marginStart: 5, padding: 5, fontSize: 12 }}>
-            <Text style={{ flexWrap: 'nowrap',color:colors.black }}>{item.title}</Text>
-            <View style={{ width: width - 150, flexDirection: 'row',marginVertical:5 }}>
+            <Text style={{ flexWrap: 'nowrap', color: colors.black }}>{item.title}</Text>
+            <View style={{ width: width - 150, flexDirection: 'row', marginVertical: 5 }}>
               <View style={{ marginVertical: 15, flexDirection: 'row' }}>
                 <SimpleLineIcons style={{}} name={'handbag'} size={20} color={colors.black} />
-                <Text style={{ marginStart: 5,color:colors.black, fontSize: 12, alignSelf: 'center' }}>{item.products.length} Products</Text>
+                <Text style={{ marginStart: 5, color: colors.black, fontSize: 12, alignSelf: 'center' }}>{item.products.length} Products</Text>
               </View>
               <View style={{ height: 20, alignSelf: 'center', borderEndColor: '#000', borderEndWidth: 1, marginHorizontal: 10 }} />
-              <View style={{ marginVertical: 5, flexDirection: 'row' ,alignItems:'center'}}>
+              <View style={{ marginVertical: 5, flexDirection: 'row', alignItems: 'center' }}>
                 <SimpleLineIcons style={{}} name={'clock'} size={20} color={colors.black} />
-                <Text style={{ marginStart: 5, fontSize: 12, alignSelf: 'center',color:colors.black }}>{item.duration}</Text>
+                <Text style={{ marginStart: 5, fontSize: 12, alignSelf: 'center', color: colors.black }}>{item.duration}</Text>
               </View>
             </View>
-            <Text style={{ fontSize: 14, fontWeight: "bold",color:colors.black }}>{moment(item.time).format('hh:mm')}</Text>
+            <Text style={{ fontSize: 14, fontWeight: "bold", color: colors.black }}>{moment(item.time).format('hh:mm')}</Text>
           </View>
         </View>
         <View style={{ borderColor: "#000", borderTopWidth: 0.5, marginTop: 10, flexDirection: 'row', justifyContent: 'space-evenly' }}>
@@ -103,7 +111,7 @@ export default function Home({navigation}) {
       <Header navigation={navigation} />
 
       <ScrollView>
-        <View style={{padding: 0, backgroundColor: colors.white }}>
+        <View style={{ padding: 0, backgroundColor: colors.white }}>
           <View style={{ margin: 20 }}>
             <Text style={{ fontSize: 24, fontWeight: '500', color: colors.black }}>Hello,</Text>
             <Text style={{ fontSize: 36, fontWeight: '600', color: colors.black }}>Alexio</Text>
@@ -122,17 +130,20 @@ export default function Home({navigation}) {
                 <SchedulesView />
               )
           }
-          <View style={{width: width - 40,flexDirection: 'row',paddingVertical:30,alignItems:"center",alignSelf:'center', justifyContent: 'space-evenly' }}>
-                  <TouchableOpacity 
-                  style={[GlobalStyles.buttonNotClicked, { borderRadius: 20,width: (width - 100)/2,padding:(width/100)*3 }]}
-                  onPress={()=>navigation.navigate("ChooseCategory")}
-                  >
-                    <Octicons name='calendar' size={40} color={colors.primary}/>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={[GlobalStyles.buttonClicked, { borderRadius: 20,width: (width - 100)/2,padding:(width/100)*3 }]}>
-                    <SimpleLineIcons name='control-play' size={40} color={colors.white}/>
-                  </TouchableOpacity>
-                </View>
+          <View style={{ width: width - 40, flexDirection: 'row', paddingVertical: 30, alignItems: "center", alignSelf: 'center', justifyContent: 'space-evenly' }}>
+            <TouchableOpacity
+              style={[Schedules.length == 0 ?GlobalStyles.buttonClicked: GlobalStyles.buttonNotClicked, { borderRadius: 20, width: (width - 100) / 2, padding: (width / 100) * 3 }]}
+              onPress={() => navigation.navigate("ChooseCategory")}
+            >
+              <Octicons style={[Schedules.length == 0 ?GlobalStyles.buttonClickedText: GlobalStyles.buttonNotClickedText,{fontSize:40}]} name='calendar' size={40} color={colors.primary} />
+            </TouchableOpacity>
+            <TouchableOpacity 
+            style={[Schedules.length == 0 ?GlobalStyles.buttonNotClicked: GlobalStyles.buttonClicked, { borderRadius: 20, width: (width - 100) / 2, padding: (width / 100) * 3 }]}
+            onPress={()=>navigation.navigate("GoLive")}
+            >
+              <SimpleLineIcons name='control-play' size={40} color={colors.white} />
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </>

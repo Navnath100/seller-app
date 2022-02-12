@@ -6,19 +6,17 @@ import {
   DarkTheme as NavigationDarkTheme
 } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme
 } from 'react-native-paper';
-
 import { DrawerContent } from './router/DrawerContent';
-
+import Chat from './Chat';
 import play from './playground';
 import Home from './screens/Home';
 import About from './screens/About';
-import GoLive from './screens/GoLive';
+import GoLive from './screens/GoLive/GoLive';
 import Subscriptions from './screens/Subscriptions';
 import ChooseCategory from './screens/ChooseCategory';
 import SelectProduct from './screens/SelectProduct';
@@ -27,12 +25,12 @@ import ChoosePlatform from './screens/ChoosePlatform';
 import ScheduleLive from './screens/ScheduleLive';
 import LiveScheduled from './screens/LiveScheduled';
 import Permissions from './screens/Permissions';
-
 import { AuthContext } from './components/context';
-
 import RootStackScreen from './router/RootStackScreen';
-
 import AsyncStorage from '@react-native-community/async-storage';
+
+import BottomTabs from './router/BottomTabs'
+
 require('./constants/server');
 
 const Drawer = createDrawerNavigator();
@@ -40,6 +38,7 @@ const Drawer = createDrawerNavigator();
 const App = () => {
   LogBox.ignoreLogs([
     "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
+    'new NativeEventEmitter'
   ]);
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null); 
@@ -184,8 +183,10 @@ const App = () => {
               }}
               drawerContent={props => <DrawerContent {...props} />}
             >
+              <Drawer.Screen name="BottomTabs" component={BottomTabs} />
               <Drawer.Screen name="Home" component={Home} />
               <Drawer.Screen name="play" component={play} />
+              <Drawer.Screen name="Chat" component={Chat} />
               <Drawer.Screen name="Permissions" component={Permissions} />
               <Drawer.Screen name="ScheduleLive" component={ScheduleLive} />
               <Drawer.Screen name="SelectProduct" component={SelectProduct} />

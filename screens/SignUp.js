@@ -156,7 +156,7 @@ export default SignUp = () => {
 
     const OnCompletionSignUp = () => (
         <View style={GlobalStyles.box}>
-            <Text style={{ fontSize: 100 ,textAlign:'center',marginVertical:30}}>🎉</Text>
+            <Text style={{ fontSize: 100 ,textAlign:'center',marginVertical:30,color:colors.black}}>🎉</Text>
             <Text style={styles.thankYouText}>THANK YOU</Text>
             <Text style={styles.signUpCompletionText}>...for showing your interest. Our seller support team will get in touch with you within 24-48 hrs.</Text>
             <Text style={[styles.signUpCompletionText,{fontWeight:'800'}]}>Have a nice day!</Text>
@@ -199,6 +199,6 @@ export default SignUp = () => {
 }
 const styles = StyleSheet.create({
     container:{ flex: 1, backgroundColor: "transparent" },
-    thankYouText : { fontSize: 24 ,textAlign:'center',fontWeight:'800',color:'#fff'},
-    signUpCompletionText : { width:'80%',fontSize: 18 ,textAlign:'center',alignSelf:'center',fontWeight:'600',color:'#fff',padding:10}
+    thankYouText : { fontSize: 24 ,textAlign:'center',fontWeight:'800',color:colors.white},
+    signUpCompletionText : { width:'80%',fontSize: 18 ,textAlign:'center',alignSelf:'center',fontWeight:'600',color:colors.white,padding:10}
 })

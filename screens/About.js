@@ -23,7 +23,7 @@ export default function About(props) {
     const [AuthModal, setAuthModal] = useState(false);
 
     useEffect(() => {
-        setAuthModal(true);
+        // setAuthModal(true);
     }, [])
     function Switch(props) {
         // console.log();

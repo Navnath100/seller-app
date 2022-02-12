@@ -8,6 +8,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import GlobalStyles from '../components/GlobalStylesheet'
 import CardView from 'react-native-cardview';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { height, width } = Dimensions.get("window")
 const cardWidth = (width / 100) * 95;
@@ -19,7 +20,7 @@ export default function Permissions({ navigation, route }) {
     const [Mic, setMic] = useState(null);
     const [Camera, setCamera] = useState(null);
     const [OnScreen, setOnScreen] = useState('Location');
-    
+
     useEffect(() => {
         try {
             if (platform == 'android') {
@@ -28,7 +29,8 @@ export default function Permissions({ navigation, route }) {
                         setLocation(result['android.permission.ACCESS_FINE_LOCATION']);
                         setCamera(result['android.permission.CAMERA']);
                         setMic(result['android.permission.RECORD_AUDIO']);
-                    })
+                        
+                    }).then(()=>setScreen(Location,Mic,Camera))
                     .catch((error) => {
                         Alert.alert("Error", error,
                             [{ text: "OK", onPress: () => { } }]
@@ -40,7 +42,7 @@ export default function Permissions({ navigation, route }) {
                         setLocation(result['ios.permission.LOCATION_WHEN_IN_USE']);
                         setCamera(result['ios.permission.CAMERA']);
                         setMic(result['ios.permission.MICROPHONE']);
-                    })
+                    }).then(()=>setScreen())
                     .catch((error) => {
                         Alert.alert("Error", error,
                             [{ text: "OK", onPress: () => { } }]
@@ -53,17 +55,17 @@ export default function Permissions({ navigation, route }) {
 
     }, []);
 
-    useEffect(() => {
-        if (Location == "granted") {
+    const setScreen = () => {
+        // console.log("Location,Mic,Camera",Location,Mic,Camera);
+        if (Location != "granted")
+            setOnScreen("Location")
+        else if (Mic != "granted")
             setOnScreen("Mic")
-        }
-    }, [Location]);
-
-    useEffect(() => {
-        if (Mic == "granted") {
+        else if (Camera != "granted")
             setOnScreen("Camera")
-        }
-    }, [Mic]);
+        else
+            navigation.navigate(goBack);
+    }
 
     console.log(Location, Mic, Camera);
 
@@ -72,12 +74,7 @@ export default function Permissions({ navigation, route }) {
             if (platform == "android") {
                 request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
                     setLocation(result)
-                    if (Mic != 'granted')
-                        setOnScreen("Mic")
-                    else if (Camera != 'granted')
-                        setOnScreen("Camera")
-                    else
-                        navigation.navigate(goBack)
+
                 });
             } else if (platform == 'ios' || platform == 'macos') {
                 request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
@@ -86,6 +83,12 @@ export default function Permissions({ navigation, route }) {
                 });
             }
         }
+        else if (Mic != 'granted')
+            setOnScreen("Mic")
+        else if (Camera != 'granted')
+            setOnScreen("Camera")
+        else
+            navigation.navigate(goBack)
 
     }
 
@@ -93,19 +96,29 @@ export default function Permissions({ navigation, route }) {
         if (platform == "android" && Mic != "granted") {
             request(PERMISSIONS.ANDROID.RECORD_AUDIO).then((result) => {
                 setMic(result)
-                if (Camera != 'granted')
-                    setOnScreen("Camera")
-                else
-                    navigation.navigate(goBack)
+
             });
-        } else if (platform == 'ios' || platform == 'macos') {
+        } else if (platform == 'ios' || platform == 'macos' && Mic != "granted") {
             request(PERMISSIONS.IOS.MICROPHONE).then((result) => {
                 setMic(result);
-                if (Camera != 'granted')
-                    setOnScreen("Camera")
-                else
-                    navigation.navigate(goBack)
             });
+        } else if (Camera != 'granted')
+            setOnScreen("Camera")
+        else
+            navigation.navigate(goBack)
+    }
+useEffect(() => {
+    setAsyncStorage();
+}, [Location,Mic,Camera]);
+
+    const setAsyncStorage = async () => {
+        try {
+            await AsyncStorage.setItem('isPermissionAsked', JSON.stringify(true));
+            await AsyncStorage.setItem('Location', JSON.stringify(Location));
+            await AsyncStorage.setItem('Mic', JSON.stringify(Mic));
+            await AsyncStorage.setItem('Camera', JSON.stringify(Camera));
+        } catch (e) {
+            alert("Catched Error : ", e)
         }
     }
 
@@ -115,12 +128,13 @@ export default function Permissions({ navigation, route }) {
                 setCamera(result)
                 navigation.navigate(goBack)
             });
-        } else if (platform == 'ios' || platform == 'macos') {
+        } else if (platform == 'ios' || platform == 'macos' && Camera != "granted") {
             request(PERMISSIONS.IOS.CAMERA).then((result) => {
                 setCamera(result);
                 navigation.navigate(goBack)
             });
-        }
+        }else
+        navigation.navigate(goBack)
     }
 
     return (

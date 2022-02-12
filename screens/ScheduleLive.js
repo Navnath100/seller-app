@@ -16,7 +16,7 @@ const { height, width } = Dimensions.get('window');
 const cardWidth = (width / 100) * 95;
 const cardHeight = cardWidth + ((cardWidth / 100) * 40);
 
-export default function ScheduleLive({navigation}) {
+export default function ScheduleLive({ navigation }) {
     const [Date, setDate] = useState(Date);
     //dropdown state
     const [open, setOpen] = useState(false);
@@ -57,23 +57,26 @@ export default function ScheduleLive({navigation}) {
                             </View>
                         </View>
 
-                        <Text style={{ color: colors.black, marginTop: 20 }}><Text style={{ fontSize: 14, fontWeight: 'bold' }}>Go Live Now </Text>or <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Schedule</Text> your Live Stream</Text>
+                        <Text style={{ color: colors.black, marginTop: 20, fontSize: 14, fontWeight: 'bold' }}>GO LIVE NOW</Text>
 
                         <TouchableOpacity style={[GlobalStyles.buttonClicked, { height: 50, width: width / 100 * 90, alignSelf: 'center', marginTop: 20 }]}>
                             <SimpleLineIcons name='control-play' size={20} color={colors.white} />
                         </TouchableOpacity>
-                        <View style={{ width: width / 100 * 85, borderBottomColor: "#e6e6e6", borderBottomWidth: 1, marginVertical: 15 }} />
+                        <View style={{ width: width / 100 * 85, borderBottomColor: "#e6e6e6", borderBottomWidth: 1, marginVertical: 30 }} />
 
-                        <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, color: colors.black }}>Or Schedule the Live Stream</Text>
+                        {/* <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, color: colors.black }}>Or Schedule the Live Stream</Text> */}
+                        {/* <Text style={{ color: colors.black }}><Text style={{ fontSize: 14, fontWeight: 'bold' }}>Go Live Now </Text>or <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Schedule</Text> your Live Stream</Text> */}
 
                         {/* Calender View */}
                         <CardView
                             cardElevation={5}
                             cardMaxElevation={5}
                             cornerRadius={20}
-                            style={{ width: cardWidth, margin: 10, padding: 10 }}
+                            style={{ width: cardWidth, padding: 10 }}
                         >
-                        <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, alignSelf: 'flex-start', color: "#3D3D3D", marginStart: 10 }}>Pick a Day</Text>
+                            <Text style={{ color: colors.black, fontSize: 14, fontWeight: 'bold', textAlign: 'center' }}>SCHEDULE YOUR STREAM</Text>
+
+                            <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, alignSelf: 'flex-start', color: "#3D3D3D", marginStart: 10 }}>Pick a Day</Text>
                             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                                 <Text style={{ fontSize: 36, fontWeight: "500", color: colors.black }}>{moment(Date).format('DD')}</Text>
                                 <Text style={{ fontSize: 12, fontWeight: "500", color: colors.black }}>{moment(Date).format('MMMM YYYY')}</Text>
@@ -100,13 +103,13 @@ export default function ScheduleLive({navigation}) {
                             cornerRadius={20}
                             style={{ minHeight: 60, height:open?280:120, width: cardWidth, margin: 10, alignItems: 'center', padding: 10}}
                         > */}
-                            <View style={{ minHeight: 60, height:100, width: cardWidth, margin: 10, alignItems: 'center', padding: 10}}>
-                        <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, alignSelf: 'flex-start', color: "#3D3D3D", marginStart: 10 }}>Pick a Day</Text>
-                            <View style={{ width: "100%", bottom: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 2,marginTop:10 }}>
+                        <View style={{ minHeight: 60, height: 100, width: cardWidth, margin: 10, alignItems: 'center', padding: 10 }}>
+                            <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, alignSelf: 'flex-start', color: "#3D3D3D", marginStart: 10 }}>Pick a Time</Text>
+                            <View style={{ width: "100%", bottom: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 2, marginTop: 10 }}>
                                 <TextInput
                                     style={{ height: 40, fontWeight: 'bold', lineHeight: 20, fontSize: 18, borderBottomColor: '#aeaeae', borderBottomWidth: 2 }}
                                     onChangeText={(val) => { }}
-                                    placeholder="M M"
+                                    placeholder="H H"
                                     maxLength={2}
                                     textAlign={'center'}
                                     textAlignVertical={'bottom'}
@@ -117,7 +120,7 @@ export default function ScheduleLive({navigation}) {
                                 <TextInput
                                     style={{ height: 40, fontWeight: 'bold', fontSize: 18, borderBottomColor: '#aeaeae', borderBottomWidth: 2 }}
                                     onChangeText={(val) => { }}
-                                    placeholder="S S"
+                                    placeholder="M M"
                                     maxLength={2}
                                     textAlign={'center'}
                                     textAlignVertical={'top'}
@@ -138,23 +141,23 @@ export default function ScheduleLive({navigation}) {
                                 <View>
 
                                     <DropDownPicker
-                                        style={{ height: 40,borderBottomWidth:1,borderWidth:0,width: 80 }}
+                                        style={{ height: 40, borderBottomWidth: 1, borderWidth: 0, width: 80 }}
                                         open={open}
                                         value={value}
                                         items={items}
-                                        setOpen={() =>setOpen(!open)}
+                                        setOpen={() => setOpen(!open)}
                                         setValue={setValue}
-                                        dropDownContainerStyle={{borderWidth:1,borderColor:"#aeaeae"}}
+                                        dropDownContainerStyle={{ borderWidth: 1, borderColor: "#aeaeae" }}
                                     />
                                 </View>
                             </View>
-                            </View>
+                        </View>
 
                         {/* </CardView> */}
                         {/* Time View End */}
-                        <TouchableOpacity 
-                        style={[GlobalStyles.buttonClicked, { height: 50, width: width / 100 * 90, marginVertical: 10 }]}
-                        onPress={()=>navigation.navigate("LiveScheduled")}
+                        <TouchableOpacity
+                            style={[GlobalStyles.buttonClicked, { height: 50, width: width / 100 * 90, marginVertical: 10 }]}
+                            onPress={() => navigation.navigate("LiveScheduled")}
                         >
                             <SimpleLineIcons name='calendar' size={20} color={colors.white} />
                         </TouchableOpacity>

@@ -9,6 +9,15 @@ export default Users = [
         role:1    // 1 for Broadcaster; 2 for Audience
     },
     {
+        id: 87, 
+        email: 'navnath@email.com',
+        username: 'Navnath', 
+        password: '123456', 
+        userToken: 'token123',
+        mode:1,    // 1 for liveBroadcasting; 0 for video call
+        role:1    // 1 for Broadcaster; 2 for Audience
+    },
+    {
         id: 2, 
         email: 'broadcaster2@email.com',
         username: 'broadcaster2', 

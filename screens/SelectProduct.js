@@ -14,7 +14,7 @@ import CheckBox from '@react-native-community/checkbox';
 
 const { height, width } = Dimensions.get('window');
 const cardWidth = (width - 70) / 2;
-const cardHeight = cardWidth + ((cardWidth / 100) * 40);
+const cardHeight = cardWidth + ((cardWidth / 100) * 60);
 export default function SelectProduct({ navigation, route }) {
     // console.log(route.params.SelectedCategory);
     // const [SelectedCategory, setSelectedCategory] = useState(route.params.SelectedCategory);
@@ -95,6 +95,7 @@ export default function SelectProduct({ navigation, route }) {
                     style={{ width, height: height - 250, alignSelf: 'center' }}
                     data={products}
                     renderItem={({ item }) => {
+                        const isSelect = isSelected(item);
                         return (
                             <TouchableNativeFeedback
                                 style={{}}
@@ -104,10 +105,10 @@ export default function SelectProduct({ navigation, route }) {
                                     cardElevation={5}
                                     cardMaxElevation={5}
                                     cornerRadius={20}
-                                    style={{ width: cardWidth, margin: 10, padding: 10 }}
+                                    style={{ height:cardHeight,width: cardWidth, margin: 10, padding: 10,backgroundColor:isSelect?'#d9d9d9':colors.white }}
                                 >
                                     <Image
-                                        style={{ width: cardWidth - 10, height: cardWidth }}
+                                        style={{ width: cardWidth - 10, height: cardWidth,alignSelf:'center' }}
                                         source={{
                                             uri:item.image
                                         }}
@@ -119,7 +120,7 @@ export default function SelectProduct({ navigation, route }) {
                                         <CheckBox
                                             style={{}}
                                             disabled={false}
-                                            value={isSelected(item)}
+                                            value={isSelect}
                                             onValueChange={(newValue) => { }}
                                         />
                                         <Text style={{ fontSize: 10, fontWeight: 'bold' }}>Choose this product</Text>
