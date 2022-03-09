@@ -17,7 +17,7 @@ export default SignIn = () => {
     //     distanceFilter: null
     //    })
     const { signIn } = React.useContext(AuthContext);
-    const [phoneNo, setPhoneNo] = React.useState("Navnath");
+    const [phoneNo, setPhoneNo] = React.useState(1234567890);
     const [password, setPassword] = React.useState("123456");
     const [countryCodeSelectionDropdown, setCountryCodeSelectionDropdown] = useState(false)
     const [selectedCountry, setSelectedCountry] = React.useState({ "code": "IN", "dial_code": "+91", "flag": "🇮🇳", "name": { "by": "", "cz": "Indie", "en": "India", "pl": "Indie", "ru": "Индия", "ua": "Індія" } });
@@ -65,7 +65,7 @@ export default SignIn = () => {
     const loginHandle = (username, password) => {
 
         const foundUser = Users.filter(item => {
-            return username == item.username && password == item.password;
+            return username == item.mobile && password == item.password;
         });
 
         if (username == "" || password == "") {

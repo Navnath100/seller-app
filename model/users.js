@@ -14,6 +14,7 @@ export default Users = [
         username: 'Navnath', 
         password: '123456', 
         userToken: 'token123',
+        mobile:1234567890,
         mode:1,    // 1 for liveBroadcasting; 0 for video call
         role:1    // 1 for Broadcaster; 2 for Audience
     },

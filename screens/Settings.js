@@ -5,6 +5,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import GlobalStyles from '../components/GlobalStylesheet'
+import Header from '../components/Header'
+import colors from '../assets/colors';
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -37,10 +39,10 @@ export default function Settings(props) {
     const SettingsView = (params) =>
     (
         <ScrollView>
-            {/* <View style={{ width: "100%", paddingHorizontal: 20, marginVertical: 10 }}>
-                <Text style={{ fontSize: 14, fontWeight: "600", marginVertical: 5 }}>About</Text>
-                <Text style={{ fontSize: 12, fontWeight: "400" }}>Neque diam amet auctor dis vitae. Pellentesque sed et quis ut urna molestie neque, mauris. Sed magnis justo, at donec massa pellentesque a fermentum. Viverra lacinia molestie arcu orci mauris.</Text>
-            </View> */}
+            <View style={{ width: "100%", paddingHorizontal: 20, marginVertical: 10 }}>
+                <Text style={{ fontSize: 14, fontWeight: "600", marginVertical: 5,color:colors.black }}>About</Text>
+                <Text style={{ fontSize: 12, fontWeight: "400",color:colors.black }}>Neque diam amet auctor dis vitae. Pellentesque sed et quis ut urna molestie neque, mauris. Sed magnis justo, at donec massa pellentesque a fermentum. Viverra lacinia molestie arcu orci mauris.</Text>
+            </View>
             <View style={styles.settingView}>
                 <View style={{ flexDirection: "row" }}>
                     <MaterialCommunityIcons name="account" size={20} color={"#000"} style={styles.settingIcon} />
@@ -123,7 +125,8 @@ export default function Settings(props) {
     )
 
     return (
-        <View style={{ flex: 1,marginTop:50 }}>
+        <>
+            <Header navigation={props.navigation} />
             <StatusBar
                 translucent={true}
                 animated={true}
@@ -131,7 +134,8 @@ export default function Settings(props) {
                 backgroundColor='transparent'
                 hidden={false}
             />
-            {/* <ImageBackground
+            <View style={{ flex: 1, marginTop: 10 }}>
+                {/* <ImageBackground
                 style={{ height: 270 }}
                 source={require('../assets/images/aboutPageBg.png')}
             >
@@ -154,52 +158,53 @@ export default function Settings(props) {
                 </View>
             </ImageBackground> */}
 
-            
-            <SettingsView />
 
-            <Modal
-                transparent={true}
-                visible={AuthModal}
-            >
-                <View style={{ height, width, backgroundColor: '#000000aa' }}>
-                    <View style={[GlobalStyles.box]}>
-                        <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+                <SettingsView />
 
-                            <TextInput style={[GlobalStyles.TextInput]}
-                                placeholder={"ACCESS TOKEN"}
-                                placeholderTextColor={"#FFF"}
-                                onChangeText={val => { }}
-                            />
+                <Modal
+                    transparent={true}
+                    visible={AuthModal}
+                >
+                    <View style={{ height, width, backgroundColor: '#000000aa' }}>
+                        <View style={[GlobalStyles.box]}>
+                            <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+
+                                <TextInput style={[GlobalStyles.TextInput]}
+                                    placeholder={"ACCESS TOKEN"}
+                                    placeholderTextColor={"#FFF"}
+                                    onChangeText={val => { }}
+                                />
+                            </View>
+                            <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+
+                                <TextInput style={[GlobalStyles.TextInput]}
+                                    placeholder={"TOKEN TYPE"}
+                                    placeholderTextColor={"#FFF"}
+                                    onChangeText={val => { }}
+                                />
+                            </View>
+                            <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+
+                                <TextInput style={[GlobalStyles.TextInput]}
+                                    placeholder={"REFRESH TYPE"}
+                                    placeholderTextColor={"#FFF"}
+                                    onChangeText={val => { }}
+                                />
+                            </View>
+                            <TouchableOpacity
+                                style={[GlobalStyles.Button, { width: (width / 100) * 80, marginTop: 30 }]}
+                                onPress={() => setAuthModal(false)}
+                            >
+                                {/* <Text style={{ color: "#FFF", fontSize: 14, fontWeight: "700" }}>LOGIN</Text> */}
+                                <SimpleLineIcons name={'link'} size={20} color={'#FFF'} />
+                            </TouchableOpacity>
                         </View>
-                        <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
-
-                            <TextInput style={[GlobalStyles.TextInput]}
-                                placeholder={"TOKEN TYPE"}
-                                placeholderTextColor={"#FFF"}
-                                onChangeText={val => { }}
-                            />
-                        </View>
-                        <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
-
-                            <TextInput style={[GlobalStyles.TextInput]}
-                                placeholder={"REFRESH TYPE"}
-                                placeholderTextColor={"#FFF"}
-                                onChangeText={val => { }}
-                            />
-                        </View>
-                        <TouchableOpacity
-                            style={[GlobalStyles.Button, { width: (width / 100) * 80, marginTop: 30 }]}
-                            onPress={() => setAuthModal(false)}
-                        >
-                            {/* <Text style={{ color: "#FFF", fontSize: 14, fontWeight: "700" }}>LOGIN</Text> */}
-                            <SimpleLineIcons name={'link'} size={20} color={'#FFF'} />
-                        </TouchableOpacity>
                     </View>
-                </View>
 
-            </Modal>
+                </Modal>
 
-        </View>
+            </View>
+        </>
     )
 }
 

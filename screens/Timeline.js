@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from 'react'
-import { View, Text, StatusBar, ImageBackground, Image, ScrollView,TextInput, Platform, Modal, StyleSheet, Dimensions, TouchableOpacity, FlatList, SafeAreaView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, StatusBar, ImageBackground, Image, ScrollView, TextInput, Platform, Modal, StyleSheet, Dimensions, TouchableOpacity, FlatList, SafeAreaView } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import GlobalStyles from '../components/GlobalStylesheet'
+import Header from '../components/Header'
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -48,11 +49,11 @@ export default function Timeline(props) {
                     </View>
                     <View style={{ width: (width - 170), position: "relative", height: 80, marginStart: 10, alignSelf: 'center', flexShrink: 1, justifyContent: "center" }}>
                         <Text style={{ position: "absolute", top: 0, fontSize: 8, fontWeight: "400", color: "#000", flexWrap: 'wrap' }}>23 December, 2021  |  Thursday</Text>
-                        <View style={{ alignSelf: "center" }}>
+                        <View style={{ }}>
                             <Text style={{ fontSize: 10, fontWeight: "500", color: "#000", flexWrap: 'wrap' }}>White Walkers Men's & Boys Multicolor Running Casual...</Text>
                         </View>
 
-                        <View style={{ position: "absolute", bottom: 0, flexShrink: 1, flexDirection: "row", justifyContent: "space-evenly" }}>
+                        <View style={{ position: "absolute", bottom: 0, flexShrink: 1, flexDirection: "row", justifyContent: "space-between" }}>
                             <View style={styles.timelineCountsContainer}>
                                 <MaterialCommunityIcons name="clock-outline" size={15} color={"#4185EF"} style={{ marginEnd: 2 }} />
                                 <Text style={{ fontSize: 10, fontWeight: "400", alignSelf: "center" }}>5:12:45</Text>
@@ -90,7 +91,8 @@ export default function Timeline(props) {
                 backgroundColor='transparent'
                 hidden={false}
             />
-            <ImageBackground
+            <Header navigation={props.navigation} />
+            {/* <ImageBackground
                 style={{ height: 270 }}
                 source={require('../assets/images/aboutPageBg.png')}
             >
@@ -101,7 +103,6 @@ export default function Timeline(props) {
                         <Feather name="menu" size={25} color={"#FFF"} style={{ marginEnd: 15 }} onPress={() => props.navigation.openDrawer()} />
                     </View>
                     <View style={{ position: "absolute", bottom: 0, flexDirection: "row", margin: 10 }}>
-                        {/* profile-pic */}
                         <Image
                             style={{ height: 50, width: 50 }}
                             source={require('../assets/images/profile-pic.png')}
@@ -112,7 +113,7 @@ export default function Timeline(props) {
                         </View>
                     </View>
                 </View>
-            </ImageBackground>
+            </ImageBackground> 
 
             <View style={styles.AboutInfoContainer}>
                 <View style={[styles.AboutInfoView, {}]}>
@@ -129,7 +130,7 @@ export default function Timeline(props) {
                     <Text style={styles.AboutText}>321</Text>
                     <Text style={styles.AboutTitle}>LIKES</Text>
                 </View>
-            </View>
+            </View> */}
 
             {/* <View style={[{ flexDirection: "row", justifyContent: "space-evenly", marginVertical: 20 }]}>
                 <TouchableOpacity style={settingsVisibility ? GlobalStyles.buttonClicked : GlobalStyles.buttonNotClicked} onPress={() => Switch({ clicked: 1 })}>
@@ -140,46 +141,48 @@ export default function Timeline(props) {
                 </TouchableOpacity>
             </View> */}
 
+            <View style={{marginTop:30}} />
+
             <TimelineView />
 
             <Modal
                 transparent={true}
                 visible={AuthModal}
             >
-                <View style={{height,width,backgroundColor:'#000000aa'}}>
-                <View style={[GlobalStyles.box]}>
-                    <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+                <View style={{ height, width, backgroundColor: '#000000aa' }}>
+                    <View style={[GlobalStyles.box]}>
+                        <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
 
-                        <TextInput style={[GlobalStyles.TextInput]}
-                            placeholder={"ACCESS TOKEN"}
-                            placeholderTextColor={"#FFF"}
-                            onChangeText={val => { }}
-                        />
-                    </View>
-                    <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+                            <TextInput style={[GlobalStyles.TextInput]}
+                                placeholder={"ACCESS TOKEN"}
+                                placeholderTextColor={"#FFF"}
+                                onChangeText={val => { }}
+                            />
+                        </View>
+                        <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
 
-                        <TextInput style={[GlobalStyles.TextInput]}
-                            placeholder={"TOKEN TYPE"}
-                            placeholderTextColor={"#FFF"}
-                            onChangeText={val => { }}
-                        />
-                    </View>
-                    <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
+                            <TextInput style={[GlobalStyles.TextInput]}
+                                placeholder={"TOKEN TYPE"}
+                                placeholderTextColor={"#FFF"}
+                                onChangeText={val => { }}
+                            />
+                        </View>
+                        <View style={[GlobalStyles.TextInputView, { marginTop: 30 }]}>
 
-                        <TextInput style={[GlobalStyles.TextInput]}
-                            placeholder={"REFRESH TYPE"}
-                            placeholderTextColor={"#FFF"}
-                            onChangeText={val => { }}
-                        />
+                            <TextInput style={[GlobalStyles.TextInput]}
+                                placeholder={"REFRESH TYPE"}
+                                placeholderTextColor={"#FFF"}
+                                onChangeText={val => { }}
+                            />
+                        </View>
+                        <TouchableOpacity
+                            style={[GlobalStyles.Button, { width: (width / 100) * 80, marginTop: 30 }]}
+                            onPress={() => setAuthModal(false)}
+                        >
+                            {/* <Text style={{ color: "#FFF", fontSize: 14, fontWeight: "700" }}>LOGIN</Text> */}
+                            <SimpleLineIcons name={'link'} size={20} color={'#FFF'} />
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
-                        style={[GlobalStyles.Button, { width: (width/100)*80,marginTop:30  }]}
-                        onPress={() => setAuthModal(false)}
-                    >
-                        {/* <Text style={{ color: "#FFF", fontSize: 14, fontWeight: "700" }}>LOGIN</Text> */}
-                        <SimpleLineIcons name={'link'} size={20} color={'#FFF'}/>
-                    </TouchableOpacity>
-                </View>
                 </View>
 
             </Modal>
@@ -214,5 +217,5 @@ const styles = StyleSheet.create({
     settingTitle: { fontSize: 14, fontWeight: "500" },
     settingIcon: { height: 20, width: 20, marginEnd: 10 },
     settingView: { width: "100%", flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 20, marginVertical: 10 },
-    timelineCountsContainer: { width: "33.33%", flexDirection: "row", alignItems: "center", justifyContent: "center" },
+    timelineCountsContainer: { width: "33.33%", flexDirection: "row" },
 })

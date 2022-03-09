@@ -11,6 +11,7 @@ import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import CardView from 'react-native-cardview';
 import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
+import DatePicker from 'react-native-date-picker'
 
 const { height, width } = Dimensions.get('window');
 const cardWidth = (width / 100) * 95;
@@ -105,7 +106,20 @@ export default function ScheduleLive({ navigation }) {
                         > */}
                         <View style={{ minHeight: 60, height: 100, width: cardWidth, margin: 10, alignItems: 'center', padding: 10 }}>
                             <Text style={{ fontSize: 14, fontWeight: '400', marginVertical: 10, alignSelf: 'flex-start', color: "#3D3D3D", marginStart: 10 }}>Pick a Time</Text>
-                            <View style={{ width: "100%", bottom: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 2, marginTop: 10 }}>
+                            <DatePicker
+                                    modal={true}
+                                    open={true}
+                                    date={new Date()}
+                                    onConfirm={(date) => {
+                                        // setDatePickerVisibility(false)
+                                        // setDOB(date)
+                                        console.log(date);
+                                    }}
+                                    onCancel={() => {}}
+                                    mode='time'
+                                    title='Pick time'
+                                />
+                            {/* <View style={{ width: "100%", bottom: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginTop: 2, marginTop: 10 }}>
                                 <TextInput
                                     style={{ height: 40, fontWeight: 'bold', lineHeight: 20, fontSize: 18, borderBottomColor: '#aeaeae', borderBottomWidth: 2 }}
                                     onChangeText={(val) => { }}
@@ -150,7 +164,7 @@ export default function ScheduleLive({ navigation }) {
                                         dropDownContainerStyle={{ borderWidth: 1, borderColor: "#aeaeae" }}
                                     />
                                 </View>
-                            </View>
+                            </View> */}
                         </View>
 
                         {/* </CardView> */}
