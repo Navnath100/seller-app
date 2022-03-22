@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, ActivityIndicator, StatusBar, PermissionsAndroid,LogBox,Platform } from 'react-native';
+import { View, ActivityIndicator, StatusBar, PermissionsAndroid, LogBox, Platform } from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
@@ -12,8 +12,6 @@ import {
   DarkTheme as PaperDarkTheme
 } from 'react-native-paper';
 import { DrawerContent } from './router/DrawerContent';
-import Chat from './Chat';
-import play from './playground';
 import Home from './screens/Home';
 import About from './screens/About';
 import GoLive from './screens/GoLive/GoLive';
@@ -42,7 +40,7 @@ const App = () => {
   ]);
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null); 
-  
+
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   const initialLoginState = {
     isLoading: true,
@@ -185,8 +183,6 @@ const App = () => {
             >
               <Drawer.Screen name="BottomTabs" component={BottomTabs} />
               <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="play" component={play} />
-              <Drawer.Screen name="Chat" component={Chat} />
               <Drawer.Screen name="Permissions" component={Permissions} />
               <Drawer.Screen name="ScheduleLive" component={ScheduleLive} />
               <Drawer.Screen name="SelectProduct" component={SelectProduct} />
